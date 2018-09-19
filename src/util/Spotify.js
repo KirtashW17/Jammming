@@ -1,14 +1,12 @@
 const apiKey = '';
 const Spotify = {
-  getAccessToken()
+  getAccessToken(){
 
-    {
-
-      if(accessToken)
-
+      if(accessToken) {
         return accessToken;
-
+      }
       else if(window.location.href.match())
+  }
 
 
 
