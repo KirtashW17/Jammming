@@ -52,7 +52,7 @@ class App extends React.Component {
         artist:'SFDK',
         album:'Sin Miedo a Vivir',
         id:'008'
-      },]
+      }]
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -65,19 +65,18 @@ class App extends React.Component {
     let newPlaylist = this.state.playlistTracks.push(track);
     this.setState({playlistTracks : newPlaylist});
   }
-
-
   removeTrack(track){
     let trackToFind = this.state.playlistTracks.find(savedTrack => savedTrack.id==track.id);
     let trackIndex = this.state.playlistTracks.findIndex(savedTrack => savedTrack==track);
     let newPlaylist = this.state.playlistTracks.splice(trackIndex,1);
     this.setState({playlistTracks : newPlaylist});
   }
-
   updatePlaylistName(name){
     this.setState({playlistName : name});
   }
-
+  savePlaylist(){
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
+      }
   render() {
     return (
       <div>
