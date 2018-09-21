@@ -10,9 +10,9 @@ const Spotify = {
     if(accessToken){
       return accessToken;
     }
-    else if(window.location.href.match(/access_token=([^&]*)/) && window.location.href.match(/expires_in=([^&]*)/)){
-      accessToken = window.location.href.match(/access_token=([^&]*)/)[1];
-      const expiresIn = window.location.href.match(/expires_in=([^&]*)/)[1];
+    else if(window.location.href.match(/access_token=([^&])/) && window.location.href.match(/expires_in=([^&])/)){
+      accessToken = window.location.href.match(/access_token=([^&])/)[1];
+      const expiresIn = window.location.href.match(/expires_in=([^&])/)[1];
       window.setTimeout(() => accessToken = '', expiresIn*1000);
       window.history.pushState('Access Token', null, '/')
       return accessToken;
@@ -33,23 +33,20 @@ const Spotify = {
       if (response.ok) {
         return response.json();
       }
-      else {
-        console.log('API request failed');
+      throw new Error('API request failed!');
+    },networkError => console.log(networkError.message)
+    ).then(jsonResponse => {
+      if(!jsonResponse.tracks) {
+        return [];
       }
-    }).then(
-      jsonResponse => {
-        if(!jsonResponse.tracks) {
-          return [];
-        }
-        return jsonResponse.tracks.items.map(track => ({
-          id: track.id,
-          name: track.name,
-          artist: track.artists[0].name,
-          album: track.album.name,
-          uri: track.uri,
-        }));
-      }
-    );
+      return jsonResponse.tracks.items.map(track => ({
+        id: track.id,
+        name: track.name,
+        artist: track.artists[0].name,
+        album: track.album.name,
+        uri: track.uri,
+      }));
+    });
   },
   savePlaylist(playlistName, trackUris) {
     if (!playlistName || !trackUris.length) {

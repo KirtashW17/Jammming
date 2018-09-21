@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
+import Spotify from '../../util/Spotify.js';
 import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults : [{
+      searchResults : [/*{
         name: 'De Trankis',
         artist: 'LDS',
         album: 'Viridarquía',
@@ -35,9 +34,9 @@ class App extends React.Component {
         artist: 'LDS',
         album: 'Viridarquía',
         id:'005'
-      }],
+      }*/],
       playlistName : 'New Playlist',
-      playlistTracks : [{
+      playlistTracks : [/*{
         name: 'Guapo Tarde',
         artist: 'Kase-O',
         album: 'El Circulo',
@@ -52,7 +51,7 @@ class App extends React.Component {
         artist:'SFDK',
         album:'Sin Miedo a Vivir',
         id:'008'
-      }]
+      }*/]
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -81,10 +80,18 @@ class App extends React.Component {
   }
   savePlaylist(){
     const trackUris = this.state.playlistTracks.map(track => track.uri);
-      }
+    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
+      this.setState({
+        playlistName: 'New Playlist',
+        playlistTracks: []
+      });
+    });
+  }
   search(term){
-        console.log(term);
-      }
+    Spotify.search(term).then(searchResults => {
+      this.setState({searchResults: searchResults});
+    });
+  }
   render() {
     return (
       <div>
