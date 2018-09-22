@@ -42,6 +42,7 @@ class SearchBar extends React.Component {
       return "";
     }
     let savedValue = sessionStorage.getItem(v);
+    //if there are not search results, the saved term will be searched.
     if (this.props.searchResults.length==0){
       this.props.onSearch(savedValue)
     }
