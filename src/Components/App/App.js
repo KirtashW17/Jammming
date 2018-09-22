@@ -1,3 +1,4 @@
+//Import all files needed requiered by App.js and his stylesheet.
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
@@ -5,53 +6,14 @@ import Playlist from '../Playlist/Playlist.js';
 import Spotify from '../../util/Spotify.js';
 import './App.css';
 
+//Creating App Component
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults : [/*{
-        name: 'De Trankis',
-        artist: 'LDS',
-        album: 'Viridarquía',
-        id:'001'
-      },{
-        name: 'De Trankis',
-        artist: 'LDS',
-        album: 'Viridarquía',
-        id:'002'
-      },{
-        name: 'De Trankis',
-        artist: 'LDS',
-        album: 'Viridarquía',
-        id:'003'
-      },{
-        name: 'De Trankis',
-        artist: 'LDS',
-        album: 'Viridarquía',
-        id:'004'
-      },{
-        name: 'De Trankis',
-        artist: 'LDS',
-        album: 'Viridarquía',
-        id:'005'
-      }*/],
+      searchResults : [],
       playlistName : 'New Playlist',
-      playlistTracks : [/*{
-        name: 'Guapo Tarde',
-        artist: 'Kase-O',
-        album: 'El Circulo',
-        id : '006'
-      },{
-        name:'La Perla',
-        artist:'Calle 13',
-        album: 'Unknown',
-        id:'007'
-      },{
-        name:'Sin Miedo a Vivir',
-        artist:'SFDK',
-        album:'Sin Miedo a Vivir',
-        id:'008'
-      }*/]
+      playlistTracks : []
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -59,6 +21,7 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
+  //addTrack method will add a track to the playlist
   addTrack(track) {
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
@@ -68,6 +31,7 @@ class App extends React.Component {
     this.setState({playlistTracks : newPlaylist});
     }
   }
+  //removeTrack will remove a track from the playlist
   removeTrack(track){
     let trackToFind = this.state.playlistTracks.find(savedTrack => savedTrack.id==track.id);
     let trackIndex = this.state.playlistTracks.findIndex(savedTrack => savedTrack==track);
@@ -75,9 +39,11 @@ class App extends React.Component {
     newPlaylist.splice(trackIndex,1);
     this.setState({playlistTracks : newPlaylist});
   }
+  //This method will change the playlist name
   updatePlaylistName(name){
     this.setState({playlistName : name});
   }
+  //Saves a playlist to the user account (see Spotify.js) ; make anarray of trackUris to pass on savePlaylist reset the state of the playlist
   savePlaylist(){
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
@@ -87,11 +53,13 @@ class App extends React.Component {
       });
     });
   }
+  //Search a track using spotify api (see Spotify.js)
   search(term){
     Spotify.search(term).then(searchResults => {
       this.setState({searchResults: searchResults});
     });
   }
+  //This is what this component will render, information from App state is passed to other components
   render() {
     return (
       <div>

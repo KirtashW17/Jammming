@@ -4,7 +4,7 @@ import Track from '../Track/Track.js';
 import './TrackList.css';
 
 class TrackList extends React.Component {
-
+//Pass every track in the Track component mapping the tracks array (to render a TrackList)
   render() {
     return(
       <div className="TrackList">

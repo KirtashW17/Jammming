@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Track.css';
 
 class Track extends React.Component {
@@ -8,13 +7,14 @@ class Track extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
   }
+  //both methods are written in app.js and passed here using the component props.
   addTrack() {
     this.props.onAdd(this.props.track);
   }
   removeTrack() {
     this.props.onRemove(this.props.track);
   }
-
+//Render the '+' or '-' button
   renderAction() {
     if (this.props.isRemoval) {
       return <a className="Track-action" onClick={this.removeTrack}>-</a>;

@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TrackList from '../TrackList/TrackList.js'
 import './Playlist.css';
 
 class Playlist extends React.Component {
   constructor(props){
     super(props);
-
     this.handleNameChange = this.handleNameChange.bind(this);
   }
+
   handleNameChange(e){
     const name = e.target.value;
     this.props.onNameChange(name);
