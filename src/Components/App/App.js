@@ -13,8 +13,9 @@ class App extends React.Component {
     this.state = {
       searchResults : [],
       playlistName : 'New Playlist',
-      playlistTracks : []
+      playlistTracks : this.getSavedValue('playlists')
     }
+    this.getSavedValue = this.getSavedValue.bind(this);
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
@@ -22,6 +23,8 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
   //addTrack method will add a track to the playlist
+
+
   addTrack(track) {
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
@@ -29,6 +32,16 @@ class App extends React.Component {
     let newPlaylist = this.state.playlistTracks.slice();
     newPlaylist.push(track);
     this.setState({playlistTracks : newPlaylist});
+    sessionStorage.setItem('playlists',JSON.stringify(newPlaylist));
+    console.log(JSON.stringify(sessionStorage.getItem('playlists')));
+    }
+  }
+  getSavedValue(v){
+    if (sessionStorage.getItem(v) === null) {
+      return [];
+    }
+    else if (sessionStorage.getItem(v) !== undefined){
+      return JSON.parse(sessionStorage.getItem(v));
     }
   }
   //removeTrack will remove a track from the playlist
@@ -55,6 +68,9 @@ class App extends React.Component {
   }
   //Search a track using spotify api (see Spotify.js)
   search(term){
+    if(term==''){
+      return;
+    }
     Spotify.search(term).then(searchResults => {
       this.setState({searchResults: searchResults});
     });
@@ -64,6 +80,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
+
         <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">

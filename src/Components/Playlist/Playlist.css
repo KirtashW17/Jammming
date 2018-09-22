@@ -33,6 +33,17 @@
   transition: background-color .25s;
 }
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top:2rem;
+}
 .Playlist-save:hover {
   background-color: rgba(108, 65, 233, .7);
 }

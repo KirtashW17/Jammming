@@ -34,8 +34,7 @@ const Spotify = {
       else {
         console.log('API request failed');
       }
-    }).then(
-      jsonResponse => {
+    }).then(jsonResponse => {
         if(!jsonResponse.tracks) {
           return [];
         }
