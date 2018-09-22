@@ -5,8 +5,9 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      term : this.getSavedValue("term")
+      term : this.getSavedValue('term')
     }
+    this.getSavedValue = this.getSavedValue.bind(this);
     this.search = this.search.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -40,8 +41,14 @@ class SearchBar extends React.Component {
     if (sessionStorage.getItem(v) === null) {
       return "";
     }
-    this.props.onSearch(sessionStorage.getItem(v));
-    return sessionStorage.getItem(v);
+    let savedValue = sessionStorage.getItem(v);
+    if (this.props.searchResults.length==0){
+      this.props.onSearch(savedValue)
+    }
+    return savedValue;
+
+
+
   }
 
   render() {
