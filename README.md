@@ -11,10 +11,10 @@ Jammming es una aplicación web la cual te permite buscar tus canciones favorita
 ## Características añadidas :
 - Restaura las busquedas tras actualizar la pagina o al obtener el accesToken.
 - Pulsar enter comenzará una nueva busqueda.
-- Restaura la playlist creada en caso de que caduque el token o se actialize la pagina.
+- Restaura la playlist creada en caso de que caduque el token o se actualice la pagina.
 - Ahora es posible ver las carátulas de las canciones.
 - Las canciones que ya hayan sido añadidas a la playlist no aparecerán en la busqueda.
-- Arreglador ciertos errores, como por ejemplo al intentar guardar una playlist vacía o sin nombre.
+- Arreglados ciertos errores, como por ejemplo al intentar guardar una playlist vacía o sin nombre.
 - Se ha añadido un botón para entrar en tu librería de Spotify.
 
 # ENGLISH
