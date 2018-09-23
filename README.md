@@ -15,6 +15,7 @@ Jammming es una aplicación web la cual te permite buscar tus canciones favorita
 - Ahora es posible ver las carátulas de las canciones.
 - Las canciones que ya hayan sido añadidas a la playlist no aparecerán en la busqueda.
 - Arreglador ciertos errores, como por ejemplo al intentar guardar una playlist vacía o sin nombre.
+- Se ha añadido un botón para entrar en tu librería de Spotify.
 
 # ENGLISH
 Jammming is a web-app that allows you to search your favorite songs and add them to a Playlist, which you can rename and save in your Spotify account.
@@ -34,3 +35,4 @@ Jammming is a web-app that allows you to search your favorite songs and add them
 - Now it is possible to see the covers of the songs.
 - Songs that have already been added to the playlist will not appear in the search.
 - Some errors fixed, such as when trying to save an empty or unnamed playlist.
+- Was added a button which redirect to your Spotift library.
