@@ -6,17 +6,25 @@ class Playlist extends React.Component {
   constructor(props){
     super(props);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.getPlaylistName = this.getPlaylistName.bind(this);
   }
 //Event handler which will change the stat of the name of the playlist when the target input value changes
   handleNameChange(e){
     const name = e.target.value;
     this.props.onNameChange(name);
   }
-
+  //Save the playlist name on reloading page
+  getPlaylistName(){
+    const playlistName=sessionStorage.getItem('playlistName');
+    if (playlistName===null){
+      return 'New Playlist';
+    }
+    return playlistName;
+  }
   render () {
     return(
       <div className="Playlist">
-        <input defaultValue={'New Playlist'} onChange={this.handleNameChange} />
+        <input defaultValue={this.getPlaylistName()} onChange={this.handleNameChange} />
         <TrackList tracks={this.props.playlistTracks} onRemove={this.props.onRemove} isRemoval={true} />
         <a className="Playlist-save" onClick={this.props.onSave} >SAVE TO SPOTIFY</a>
         {/*Added Spotify Library button with href*/}

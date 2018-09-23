@@ -32,3 +32,9 @@
   font-weight: 300;
   color: rgba(256, 256, 256, 0.8);
 }
+
+
+.Track-album-cover {
+  margin-right: 8px;
+  margin-top: 0;
+}

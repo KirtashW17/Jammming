@@ -21,10 +21,19 @@ class Track extends React.Component {
     }
     return <a className="Track-action" onClick={this.addTrack}>+</a>;
   }
-
+  renderCover() {
+    return <i className="fa fa-pause Track-preview-icon" aria-hidden="true" onClick={this.togglePlayPreview}></i>;
+              }
   render() {
     return (
       <div className="Track">
+        <div>
+          <div>
+            {this.renderCover()}
+          </div>
+          <img className="Track-album-cover" src={this.props.track.cover} alt="album cover"/>
+        </div>
+
         <div className="Track-information">
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>

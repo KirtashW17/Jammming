@@ -22,9 +22,21 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
+
+  //get playlist tracks
+  getSavedValue(v){
+    if (sessionStorage.getItem(v) === null||sessionStorage.getItem(v)=== undefined ||sessionStorage.getItem(v).length===0) {
+      return [];
+    }
+    else if (sessionStorage.getItem(v) !== undefined){
+      return JSON.parse(sessionStorage.getItem(v));
+    }
+  }
+  saveValue(name,value){
+    sessionStorage.setItem(name,value);
+  }
+
   //addTrack method will add a track to the playlist
-
-
   addTrack(track) {
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
@@ -33,17 +45,11 @@ class App extends React.Component {
     newPlaylist.push(track);
     this.setState({playlistTracks : newPlaylist});
     sessionStorage.setItem('playlists',JSON.stringify(newPlaylist));
-    console.log(JSON.stringify(sessionStorage.getItem('playlists')));
     }
   }
-  getSavedValue(v){
-    if (sessionStorage.getItem(v) === null) {
-      return [];
-    }
-    else if (sessionStorage.getItem(v) !== undefined){
-      return JSON.parse(sessionStorage.getItem(v));
-    }
-  }
+
+
+
   //removeTrack will remove a track from the playlist
   removeTrack(track){
     let trackToFind = this.state.playlistTracks.find(savedTrack => savedTrack.id==track.id);
@@ -51,19 +57,31 @@ class App extends React.Component {
     let newPlaylist = this.state.playlistTracks.slice();
     newPlaylist.splice(trackIndex,1);
     this.setState({playlistTracks : newPlaylist});
+    this.saveValue('playlists',JSON.stringify(newPlaylist));
   }
   //This method will change the playlist name
-  updatePlaylistName(name){
+  updatePlaylistName(name,playlistTracks){
     this.setState({playlistName : name});
+    this.saveValue('playlistName',name);
+
   }
   //Saves a playlist to the user account (see Spotify.js) ; make anarray of trackUris to pass on savePlaylist reset the state of the playlist
   savePlaylist(){
+    if (this.state.playlistName==null || this.state.playlistTracks==null){
+      console.log('ERROR: Playlist tracks or name cannot be empty!')
+      return;
+    }
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
       this.setState({
         playlistName: 'New Playlist',
         playlistTracks: []
       });
+      this.saveValue('playlistName','New Playlist');
+      this.saveValue('playlists',JSON.stringify(this.state.playlistTracks));
+      //reload the page to re-set the playlist name to New Playlist (the state is New playlist but playlist.js has not updated the input)
+      window.location.reload();
+
     });
   }
   //Search a track using spotify api (see Spotify.js)
@@ -83,7 +101,7 @@ class App extends React.Component {
 
         <div className="App">
           <SearchBar onSearch={this.search} searchResults={this.state.searchResults} />
-          <div className="App-playlist">
+          <div className="App-playlist" >
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
             <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} />
           </div>

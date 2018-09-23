@@ -1,8 +1,16 @@
-const clientId = 'a59c40bc05f2470ba90cb7fa553914ca';
+const clientId = ''; // Set your own ClientID
 const link = 'http://localhost:3000'; //this is the redirect URL,after login in your Spotify account, you will redirected here.
 let accessToken;
 
 const Spotify = {
+  getSavedValue(v){
+    if (sessionStorage.getItem(v) === null) {
+      return [];
+    }
+    else if (sessionStorage.getItem(v) !== undefined){
+      return JSON.parse(sessionStorage.getItem(v));
+    }
+  },
   //Get access token by URL
   getAccessToken(){
     if(accessToken){
@@ -34,17 +42,24 @@ const Spotify = {
       else {
         console.log('API request failed');
       }
-    }).then(jsonResponse => {
+    }).then(
+      jsonResponse => {
         if(!jsonResponse.tracks) {
           return [];
         }
-        return jsonResponse.tracks.items.map(track => ({
+        return jsonResponse.tracks.items.map(function(track){
+          //if (Spotify.getSavedValue('playlists').find(savedTrack => savedTrack.id === track.id)){return;}
+          //else {
+          return({
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri,
-        }));
+          cover: track.album.images[2].url,
+        });
+      //}
+        });
       }
     );
   },
