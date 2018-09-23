@@ -12,9 +12,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchResults :[],
-      playlistName : 'New Playlist',
+      playlistName : this.getPlaylistName(),
       playlistTracks : this.getSavedValue('playlists')
     }
+    this.getPlaylistName = this.getPlaylistName.bind(this);
     this.getSavedValue = this.getSavedValue.bind(this);
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -23,6 +24,14 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  //get a playlist name
+  getPlaylistName(){
+    const playlistName=sessionStorage.getItem('playlistName');
+    if (playlistName===null){
+      return 'New Playlist';
+    }
+    return playlistName;
+  }
   //get playlist tracks
   getSavedValue(v){
     if (sessionStorage.getItem(v) === null||sessionStorage.getItem(v)=== undefined ||sessionStorage.getItem(v).length===0) {
@@ -103,7 +112,7 @@ class App extends React.Component {
           <SearchBar onSearch={this.search} searchResults={this.state.searchResults} />
           <div className="App-playlist" >
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} />
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} onGetPlaylist={this.getPlaylistName} />
           </div>
         </div>
       </div>

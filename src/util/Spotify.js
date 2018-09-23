@@ -1,4 +1,4 @@
-const clientId = ''; // Set your own ClientID
+const clientId = 'a59c40bc05f2470ba90cb7fa553914ca'; // Set your own ClientID
 const link = 'http://localhost:3000'; //this is the redirect URL,after login in your Spotify account, you will redirected here.
 let accessToken;
 
@@ -56,7 +56,7 @@ const Spotify = {
           artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri,
-          cover: track.album.images[2].url,
+          cover: track.album.images[2].url
         });
       //}
         });
