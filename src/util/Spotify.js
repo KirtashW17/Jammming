@@ -1,4 +1,4 @@
-const clientId = ''; // Set your own ClientID
+const clientId = 'a59c40bc05f2470ba90cb7fa553914ca'; // Set your own ClientID
 const link = 'http://localhost:3000'; //this is the redirect URL,after login in your Spotify account, you will redirected here.
 let accessToken;
 
@@ -29,7 +29,7 @@ const Spotify = {
     }
   },
   search(term) {
-    const accessToken = Spotify.getAccessToken();
+    //const accessToken = Spotify.getAccessToken();
     //Search tracks on Spotify API
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
       headers: {

@@ -119,5 +119,5 @@ class App extends React.Component {
     );
   }
 }
-
+window.onload = Spotify.getAccessToken;
 export default App;

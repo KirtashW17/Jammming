@@ -41,10 +41,11 @@ class SearchBar extends React.Component {
       return "";
     }
 
+
     //if there are not search results, the saved term will be searched.
-    if (this.props.searchResults.length==0){
-      this.props.onSearch(savedValue)
-    }
+    //I wasn't be able to make an if statement that checks if this.state.term
+    //can't acces this of undefined, i don't understand why, the method was binded.
+
     return savedValue;
 
 
