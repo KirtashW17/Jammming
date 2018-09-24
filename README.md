@@ -1,7 +1,7 @@
 # Jammming Capstone Project for CodeCademy.
 
 Jammming es una aplicación web la cual te permite buscar tus canciones favoritas y añadirlas a una Playlist, la cual podrás renombrar y guardar en tu cuenta de Spotify.
-> Puedes probar la aplicación en el siguiente enlace : http://jammmingcc.surge.sh
+> Puedes probar la aplicación en el siguiente enlace : http://jammming-cc.surge.sh
 
 ## Características :
 - Puedes buscar canciones por nombre, album o artista.
@@ -19,7 +19,7 @@ Jammming es una aplicación web la cual te permite buscar tus canciones favorita
 
 # ENGLISH
 Jammming is a web-app that allows you to search your favorite songs and add them to a Playlist, which you can rename and save in your Spotify account.
-> You can test the app at the following link : http://jammmingcc.surge.sh
+> You can test the app at the following link : http://jammming-cc.surge.sh
 
 
 ## Features :
